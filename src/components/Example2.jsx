@@ -29,11 +29,22 @@ const Example2 = () => {
     },[])
 
     const defaultColDef = {
-        flex : 1
+        flex : 1,
+        filter :true
     }
+
+    const rowSelection = {
+        mode: 'multiRow',
+        headerCheckbox: false
+    }
+
+    const pagination = true;
+    const paginationPageSize = 20;
+    const paginationPageSizeSelector = [20,50,100]
+
   return (
-    <div className="ag-theme-quartz" style={{height: 500}}>
-        <AgGridReact rowData={rowData} columnDefs={colDefs} defaultColDef={defaultColDef}/>
+    <div className="ag-theme-quartz" style={{height: 700}}>
+        <AgGridReact rowData={rowData} columnDefs={colDefs} defaultColDef={defaultColDef} rowSelection={rowSelection} pagination={pagination} paginationPageSize={paginationPageSize} paginationPageSizeSelector={paginationPageSizeSelector}/>
     </div>
   )
 }
