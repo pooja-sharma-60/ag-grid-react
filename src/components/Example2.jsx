@@ -8,14 +8,23 @@ const CompanyLogoRenderer = ({ value }) => (
     <span style={{ display: "flex", height: "100%", width: "100%", alignItems: "center" }}>{value && <img alt={`${value} Flag`} src={`https://www.ag-grid.com/example-assets/space-company-logos/${value.toLowerCase()}.png`} style={{display: "block", width: "25px", height: "auto", maxHeight: "50%", marginRight: "12px", filter: "brightness(1.1)"}} />}<p style={{ textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" }}>{value}</p></span>
    );
 
+   const dateFormatter = (params) => {
+    return new Date(params.value).toLocaleDateString('en-us', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
+};
+
 
 const Example2 = () => {
     const [rowData , setRowData] = useState([])
     const [colDefs] = useState([
         { field: "mission" , flex: 2},
         { field: "company" , cellRenderer: CompanyLogoRenderer},
-        { field: "location" , flex: 2 },
-        { field: "date" },
+        { field: "location" },
+        { field: "date" ,valueFormatter: dateFormatter , flex:2},
         { field: "price" , valueFormatter: params => '£' + params.value.toLocaleString() },
         { field: "successful" },
         { field: "rocket" }
@@ -34,6 +43,8 @@ const Example2 = () => {
         }
     },[])
 
+   
+    
     const defaultColDef = {
         flex : 1,
         filter :true,
@@ -46,13 +57,15 @@ const Example2 = () => {
     }
 
    
+   
     const pagination = true;
     const paginationPageSize = 100;
     const paginationPageSizeSelector = [20,50,100]
 
+    
   return (
     <div className="ag-theme-quartz" style={{height: 700}}>
-        <AgGridReact rowData={rowData} columnDefs={colDefs} defaultColDef={defaultColDef} rowSelection={rowSelection} pagination={pagination} paginationPageSize={paginationPageSize} paginationPageSizeSelector={paginationPageSizeSelector} onCellValueChanged={event => console.log(`New Cell Value: ${event.value}`)}/>
+        <AgGridReact rowData={rowData} columnDefs={colDefs} defaultColDef={defaultColDef} rowSelection={rowSelection} pagination={pagination} paginationPageSize={paginationPageSize} paginationPageSizeSelector={paginationPageSizeSelector} onCellValueChanged={event => console.log(`New Cell Value: ${event.value}`)} onSelectionChanged={() => console.log('row selected')}/>
     </div>
   )
 }
