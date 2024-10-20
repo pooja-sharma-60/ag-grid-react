@@ -36,7 +36,8 @@ const Example2 = () => {
 
     const defaultColDef = {
         flex : 1,
-        filter :true
+        filter :true,
+        editable: true
     }
 
     const rowSelection = {
@@ -51,7 +52,7 @@ const Example2 = () => {
 
   return (
     <div className="ag-theme-quartz" style={{height: 700}}>
-        <AgGridReact rowData={rowData} columnDefs={colDefs} defaultColDef={defaultColDef} rowSelection={rowSelection} pagination={pagination} paginationPageSize={paginationPageSize} paginationPageSizeSelector={paginationPageSizeSelector}/>
+        <AgGridReact rowData={rowData} columnDefs={colDefs} defaultColDef={defaultColDef} rowSelection={rowSelection} pagination={pagination} paginationPageSize={paginationPageSize} paginationPageSizeSelector={paginationPageSizeSelector} onCellValueChanged={event => console.log(`New Cell Value: ${event.value}`)}/>
     </div>
   )
 }
