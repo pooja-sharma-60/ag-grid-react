@@ -42,7 +42,9 @@ const Example1 = () => {
       valueFormatter: (p) => "£" + p.value.toLocaleString(),
       filter: true,
     },
-    { field: "electric", editable: true },
+    { field: "electric", editable: true , cellClassRules: {
+        'rag-green' : p => p.value === true
+    }},
     { field: "button", cellRenderer: CustomButtonComponent },
   ]);
 
@@ -64,6 +66,9 @@ const Example1 = () => {
   const paginationPageSize = 2;
   const paginationPageSizeSelector = [2 , 4,6];
 
+  const rowClassRules = {
+    'rag-red' : p => p.data.model === '500'
+  }
 
   return (
     <div className="ag-theme-quartz" style={{ height: 500 }}>
@@ -75,6 +80,7 @@ const Example1 = () => {
         pagination = {pagination}
         paginationPageSize={paginationPageSize}
         paginationPageSizeSelector={paginationPageSizeSelector}
+        rowClassRules={rowClassRules}
       />
     </div>
   );
