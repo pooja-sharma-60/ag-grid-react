@@ -4,7 +4,6 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 import { useState } from "react";
 
 
-
 const Example1 = () => {
 
     // Row Data: The data to be displayed.
@@ -19,9 +18,9 @@ const Example1 = () => {
 
     // Column Definitions: Defines the columns to be displayed.
     const [colDefs] = useState([
-        { field: 'make' },
-        { field: 'model' },
-        { field: 'price' },
+        { headerName : 'Company', field: 'make' , valueGetter: p => p.data.make + ' ' + p.data.model }, // if header name is not present , the title is taken from the field
+        { field: 'model'  },
+        { field: 'price', valueFormatter: p => '£' + p.value.toLocaleString()  },
         { field: 'electric' },
     ])
 
